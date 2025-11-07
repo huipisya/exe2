@@ -178,9 +178,9 @@ def add_citation_to_post(user_id: int, link: str, citation: str):
         if ws[f'B{row}'].value == link:
             current_citations = ws[f'D{row}'].value or ""
             
-            # Добавляем новое цитирование с новой строки
+            # Добавляем новое цитирование через запятую
             if current_citations:
-                new_citations = current_citations + "\n" + citation
+                new_citations = current_citations + ", " + citation
             else:
                 new_citations = citation
             
@@ -194,7 +194,6 @@ def add_citation_to_post(user_id: int, link: str, citation: str):
             send_backup_for_user(user_id)
             return True
     return False
-
 def link_exists_in_excel(user_id: int, link: str) -> bool:
     """Проверка существования ссылки в базе"""
     excel_file = get_user_excel_file(user_id)
